@@ -141,7 +141,7 @@ input,select,textarea{font-family:inherit;outline:none;color:var(--txt);}
 .btn.recording{background:var(--red);color:#fff;border-color:var(--red);animation:pulse-rec 1.5s infinite;}
 @keyframes pulse-rec{0%{opacity:1;}50%{opacity:0.5;}100%{opacity:1;}}
 
-/* ── PROPS PANEL & MODALS ── */
+/* ── PROPS PANEL ── */
 .props-panel{width:220px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;transition:width var(--trans);}
 .props-panel.closed{width:0;border:none;}
 .props-hdr{height:var(--header-h);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;flex-shrink:0;}
@@ -157,20 +157,39 @@ input,select,textarea{font-family:inherit;outline:none;color:var(--txt);}
 .no-selection{text-align:center;padding:24px 12px;color:var(--txt3);font-size:0.78rem;line-height:1.5;}
 .tag-chip{display:inline-block;font-size:0.7rem;padding:2px 8px;border-radius:12px;background:var(--bg4);border:1px solid var(--border2);color:var(--txt2);margin-bottom:8px;font-family:'JetBrains Mono',monospace;}
 .add-child-btn{width:100%;padding:5px;font-size:0.72rem;border-radius:5px;border:1px dashed var(--border2);color:var(--txt3);transition:all var(--trans);margin-top:4px;}
+.add-child-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── MODALS & MISC ── */
 .cp-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);z-index:900;display:none;align-items:flex-start;justify-content:center;padding-top:14vh;opacity:0;transition:opacity 0.2s;}
 .cp-overlay.open{display:flex;opacity:1;}
-.cp-box{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;width:90%;max-width:560px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);}
+.cp-box{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;width:90%;max-width:560px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.7);transform:translateY(-10px);transition:transform 0.2s;}
+.cp-overlay.open .cp-box{transform:none;}
 .cp-search{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border);}
+.cp-search svg{width:16px;height:16px;stroke:var(--txt3);fill:none;stroke-width:2;flex-shrink:0;}
 .cp-input{flex:1;background:none;border:none;font-size:0.9rem;color:var(--txt);}
+.cp-input::placeholder{color:var(--txt3);}
 .cp-results{max-height:320px;overflow-y:auto;padding:6px;}
-.cp-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;}
-.cp-item:hover{background:var(--bg4);}
+.cp-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;cursor:pointer;transition:background 0.1s;}
+.cp-item:hover,.cp-item.sel{background:var(--bg4);}
+.cp-icon{width:28px;height:28px;border-radius:6px;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cp-icon svg{width:14px;height:14px;stroke:var(--accent);fill:none;stroke-width:2;}
+.cp-text .cp-label{font-size:0.82rem;font-weight:600;}
+.cp-text .cp-desc{font-size:0.68rem;color:var(--txt3);margin-top:1px;}
+.cp-kbd{margin-left:auto;font-size:0.65rem;padding:2px 6px;border-radius:4px;background:var(--bg);border:1px solid var(--border2);color:var(--txt3);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.cp-footer{border-top:1px solid var(--border);padding:6px 16px;display:flex;gap:12px;}
+.cp-hint{font-size:0.65rem;color:var(--txt3);display:flex;align-items:center;gap:4px;}
+.cp-hint kbd{padding:1px 4px;border-radius:3px;background:var(--bg);border:1px solid var(--border2);}
 .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);z-index:800;display:none;align-items:center;justify-content:center;}
 .modal-backdrop.open{display:flex;}
 .modal{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:24px;width:90%;max-width:420px;}
 .modal-title{font-size:1rem;font-weight:700;margin-bottom:8px;}
+.modal-desc{font-size:0.8rem;color:var(--txt2);margin-bottom:16px;}
 .modal-input{width:100%;padding:8px 12px;background:var(--bg4);border:1px solid var(--border2);border-radius:6px;font-size:0.85rem;margin-bottom:16px;}
+.modal-input:focus{border-color:var(--accent);}
 .modal-actions{display:flex;justify-content:flex-end;gap:8px;}
+.label-txt{font-size:0.65rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:0.8px;}
+select.styled{padding:4px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;font-size:0.75rem;color:var(--txt);}
+select.styled:focus{border-color:var(--accent);}
 .check-label{display:flex;align-items:center;gap:5px;font-size:0.73rem;color:var(--txt2);cursor:pointer;}
 .check-label input{accent-color:var(--accent);}
 .empty-state{text-align:center;padding:20px;color:var(--txt3);font-size:0.75rem;}
@@ -189,7 +208,7 @@ input,select,textarea{font-family:inherit;outline:none;color:var(--txt);}
   <button class="sb-btn" data-drawer="export" data-tip="Export"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
   <div class="sb-sep"></div>
   <button class="sb-btn" id="btnTheme" data-tip="Toggle Theme"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
-  <button class="sb-btn" id="btnCP" data-tip="Command Palette"><svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></button>
+  <button class="sb-btn" id="btnCP" data-tip="Command Palette (Ctrl+Shift+P)"><svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></button>
 </aside>
 
 <div class="drawer" id="drawer">
@@ -212,10 +231,17 @@ input,select,textarea{font-family:inherit;outline:none;color:var(--txt);}
         <input class="cdn-input" id="cdnInput" placeholder="https://cdn.example.com/lib.js">
         <button class="small-btn" id="btnAddCdn">Add</button>
       </div>
+      <div style="margin-top:10px;">
+        <div class="label-txt" style="margin-bottom:6px;">Quick Presets</div>
+        <div class="preset-wrap" id="presetWrap"></div>
+      </div>
     </div>
   </div>
   <div class="d-section" id="dsec-history">
-    <div class="dh"><span class="dh-title">Snapshots</span></div>
+    <div class="dh">
+      <span class="dh-title">Snapshots</span>
+      <button class="sb-btn" id="btnNewSnap" style="width:28px;height:28px;" data-tip="Save now"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></button>
+    </div>
     <div class="dc" id="snapList"></div>
   </div>
   <div class="d-section" id="dsec-export">
@@ -223,6 +249,11 @@ input,select,textarea{font-family:inherit;outline:none;color:var(--txt);}
     <div class="dc" style="display:flex;flex-direction:column;gap:8px;">
       <button class="btn" id="btnExportHTML" style="width:100%;justify-content:center;">Export Single HTML</button>
       <button class="btn" id="btnExportZip" style="width:100%;justify-content:center;">Download ZIP</button>
+      <div style="border-top:1px solid var(--border);padding-top:10px;margin-top:4px;">
+        <div class="label-txt" style="margin-bottom:6px;">Import Document</div>
+        <input type="file" id="importFile" accept=".html,.txt" style="display:none;">
+        <button class="btn" id="btnImport" style="width:100%;justify-content:center;">Import File</button>
+      </div>
     </div>
   </div>
 </div>
@@ -242,7 +273,7 @@ input,select,textarea{font-family:inherit;outline:none;color:var(--txt);}
     <div class="editor-wrap" id="monacoMount"></div>
     <div class="console-panel closed" id="consolePanel">
       <div class="console-hdr" id="consoleHdr">
-        <span class="console-title">Console</span>
+        <span class="console-title"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg> Console</span>
         <div style="display:flex;gap:6px;align-items:center;">
           <button style="font-size:0.65rem;color:var(--txt3);" id="btnClearLog">Clear</button>
           <span id="consoleChev" style="font-size:0.7rem;color:var(--txt3);">▲</span>
@@ -266,10 +297,10 @@ input,select,textarea{font-family:inherit;outline:none;color:var(--txt);}
         <button class="btn" id="btnOrientation">Rotate</button>
       </div>
       <div style="display:flex;gap:6px;align-items:center;">
-        <button class="btn" id="btnScreenshot"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> PNG</button>
-        <button class="btn primary" id="btnAutoRecord"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> Download Video (5s)</button>
+        <button class="btn" id="btnScreenshot" data-tip="Take Snapshot Image"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> PNG</button>
+        <button class="btn" id="btnRecord" data-tip="Record Output Video"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> Record</button>
         <button class="btn" id="btnDesignMode">🎨 Design</button>
-        <button class="btn" id="btnPropsToggle">Props</button>
+        <button class="btn" id="btnPropsToggle"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> Props</button>
         <button class="btn" id="btnFullscreen">⛶</button>
       </div>
     </div>
@@ -282,20 +313,24 @@ input,select,textarea{font-family:inherit;outline:none;color:var(--txt);}
 
   <div class="props-panel closed" id="propsPanel">
     <div class="props-hdr"><span class="props-title">Properties</span></div>
-    <div class="props-body" id="propsBody"><div class="no-selection">Select an element with Design Mode ON.</div></div>
+    <div class="props-body" id="propsBody">
+      <div class="no-selection">Click any element in the preview with Design Mode ON to inspect &amp; edit its properties. Drag and drop elements inside the preview window to reposition them.</div>
+    </div>
   </div>
 </div>
 
 <div class="cp-overlay" id="cpOverlay">
   <div class="cp-box">
-    <div class="cp-search"><input class="cp-input" id="cpInput" placeholder="Type a command..."></div>
+    <div class="cp-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="cp-input" id="cpInput" placeholder="Type a command..."></div>
     <div class="cp-results" id="cpResults"></div>
+    <div class="cp-footer"><span class="cp-hint"><kbd>↑↓</kbd> navigate</span><span class="cp-hint"><kbd>↵</kbd> run</span><span class="cp-hint"><kbd>Esc</kbd> close</span></div>
   </div>
 </div>
 
 <div class="modal-backdrop" id="modalBd">
   <div class="modal">
     <div class="modal-title" id="modalTitle">New Project</div>
+    <div class="modal-desc" id="modalDesc">Give your project a name.</div>
     <input class="modal-input" id="modalInput" placeholder="Project name...">
     <div class="modal-actions">
       <button class="btn" id="modalCancel">Cancel</button>
@@ -314,34 +349,66 @@ window.MonacoEnvironment = {
   }
 };
 
+/* ═══════════════════════════════════════
+   UNIFIED TEMPLATES
+═══════════════════════════════════════ */
 const TEMPLATES = [
   {
-    id:'particle', name:'Particle System', desc:'Animated canvas demo.',
-    code:`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <style>\n    *{margin:0;padding:0;box-sizing:border-box;}\n    body{background:#020409;overflow:hidden;font-family:system-ui,sans-serif;color:#fff;}\n    canvas{position:fixed;top:0;left:0;}\n    .ui{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}\n    h1{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#6366f1,#d946ef);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}\n  </style>\n</head>\n<body>\n  <canvas id="c"></canvas>\n  <div class="ui">\n    <h1>CodeForge</h1>\n    <p>Automated Video Render Demo</p>\n  </div>\n  <script>\n    const c=document.getElementById("c"),ctx=c.getContext("2d");let w=c.width=innerWidth,h=c.height=innerHeight;window.addEventListener("resize",()=>{w=c.width=innerWidth;h=c.height=innerHeight;});const pts=Array.from({length:100},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*1.2,vy:(Math.random()-0.5)*1.2,r:Math.random()*3+1}));function loop(){ctx.clearRect(0,0,w,h);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(99,102,241,0.8)";ctx.fill();});requestAnimationFrame(loop);}loop();\n  <\/script>\n</body>\n</html>`
+    id:'blank', name:'Blank Canvas', desc:'Clean start.', tags:['minimal'],
+    code:`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { font-family: system-ui, sans-serif; background: #0f1015; color: #f1f5f9; display: flex; align-items: center; justify-content: center; min-height: 100vh; }\n    .box { text-align: center; padding: 40px; }\n    h1 { font-size: 2.5rem; margin-bottom: 12px; }\n    p { color: #94a3b8; margin-bottom: 20px; }\n    button { padding: 10px 24px; background: #6366f1; color: #fff; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; }\n  </style>\n</head>\n<body>\n  <div class="box">\n    <h1>Hello World</h1>\n    <p>Start building!</p>\n    <button onclick="alert('hi')">Click me</button>\n  </div>\n  <script>\n    console.log("Ready!");\n  <\/script>\n</body>\n</html>`
+  },
+  {
+    id:'particle', name:'Particle System', desc:'Animated canvas particle demo.', tags:['canvas','animation'],
+    code:`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <style>\n    *{margin:0;padding:0;box-sizing:border-box;}\n    body{background:#020409;overflow:hidden;font-family:system-ui,sans-serif;color:#fff;}\n    canvas{position:fixed;top:0;left:0;}\n    .ui{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}\n    h1{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#6366f1,#d946ef);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}\n    p{color:#94a3b8;margin:10px 0 24px;}\n    button{padding:12px 28px;background:#6366f1;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;}\n  </style>\n</head>\n<body>\n  <canvas id="c"></canvas>\n  <div class="ui">\n    <h1>CodeForge</h1>\n    <p>High-performance unified playground</p>\n    <button id="btn">Launch</button>\n  </div>\n  <script>\n    const c=document.getElementById("c"),ctx=c.getContext("2d");let w=c.width=innerWidth,h=c.height=innerHeight;window.addEventListener("resize",()=>{w=c.width=innerWidth;h=c.height=innerHeight;});const pts=Array.from({length:100},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.8,vy:(Math.random()-0.5)*0.8,r:Math.random()*2+1}));function loop(){ctx.clearRect(0,0,w,h);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(99,102,241,0.6)";ctx.fill();});requestAnimationFrame(loop);}loop();document.getElementById("btn").onclick=()=>console.log("Launched!");\n  <\/script>\n</body>\n</html>`
+  },
+  {
+    id:'cssart', name:'CSS Art', desc:'Pure CSS planetary animation.', tags:['css','animation'],
+    code:`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <style>\n    *{margin:0;padding:0;box-sizing:border-box;}\n    body{background:#020409;display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden;font-family:system-ui,sans-serif;}\n    .scene{position:relative;width:300px;height:300px;display:flex;align-items:center;justify-content:center;}\n    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}\n    @keyframes orbit{from{transform:rotate(0deg) translateX(110px)}to{transform:rotate(360deg) translateX(110px)}}\n    .planet{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#818cf8,#6366f1 55%,#312e81);box-shadow:0 0 40px rgba(99,102,241,0.6);animation:float 4s ease-in-out infinite;position:relative;}\n    .ring{position:absolute;width:190px;height:36px;border-radius:50%;border:8px solid rgba(167,139,250,0.4);top:50%;left:50%;transform:translate(-50%,-50%) rotateX(75deg);}\n    .orbit{position:absolute;width:220px;height:220px;animation:orbit 6s linear infinite;}\n    .moon{position:absolute;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e2e8f0,#94a3b8);box-shadow:0 0 10px rgba(255,255,255,0.4);top:-11px;left:50%;transform:translateX(-50%);}\n    .label{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:0.7rem;font-weight:700;letter-spacing:3px;color:rgba(167,139,250,0.7);}\n  </style>\n</head>\n<body>\n  <div class="scene"><div class="planet"><div class="ring"></div></div><div class="orbit"><div class="moon"></div></div><p class="label">EXPLORE THE COSMOS</p></div>\n  <script>\n    console.log("CSS Art loaded");\n  <\/script>\n</body>\n</html>`
   }
 ];
 
+const CDN_PRESETS = [
+  {name:'Tailwind',url:'https://cdn.tailwindcss.com',type:'script'},
+  {name:'Bootstrap CSS',url:'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',type:'stylesheet'},
+  {name:'GSAP',url:'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',type:'script'},
+  {name:'Three.js',url:'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',type:'script'},
+  {name:'Chart.js',url:'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js',type:'script'},
+];
+
+/* ═══════════════════════════════════════
+   STATE
+═══════════════════════════════════════ */
 let S = { projects:{}, activeId:null, cdns:[] };
+const STARTER = TEMPLATES[1];
+
 function loadState() {
   const raw = localStorage.getItem('codeforge_v3_combined');
   if (raw) { try { S = JSON.parse(raw); } catch(e){} }
+  if (!S.cdns) S.cdns = [];
   if (!S.projects || !Object.keys(S.projects).length) {
     const id = 'p_' + Date.now();
-    S.projects = { [id]: { name:'Demo – Particles', code:TEMPLATES[0].code, snaps:[], updated:Date.now() } };
-    S.activeId = id; saveState();
+    S.projects = { [id]: { name:'Demo – Particles', code:STARTER.code, snaps:[], updated:Date.now() } };
+    S.activeId = id;
+    saveState();
   }
   if (!S.activeId || !S.projects[S.activeId]) S.activeId = Object.keys(S.projects)[0];
 }
 function saveState() { localStorage.setItem('codeforge_v3_combined', JSON.stringify(S)); }
 function activeProj() { return S.projects[S.activeId]; }
 
+/* ═══════════════════════════════════════
+   DRAWER / SIDEBAR NAV
+═══════════════════════════════════════ */
 const drawer = document.getElementById('drawer');
 let activeDrawer = 'projects';
+
 document.querySelectorAll('.sb-btn[data-drawer]').forEach(btn => {
   btn.addEventListener('click', () => {
     const key = btn.dataset.drawer;
     if (activeDrawer === key && !drawer.classList.contains('closed')) {
-      drawer.classList.add('closed'); btn.classList.remove('on'); activeDrawer = null;
+      drawer.classList.add('closed');
+      btn.classList.remove('on');
+      activeDrawer = null;
     } else {
       drawer.classList.remove('closed');
       document.querySelectorAll('.sb-btn[data-drawer]').forEach(b => b.classList.remove('on'));
@@ -354,120 +421,522 @@ document.querySelectorAll('.sb-btn[data-drawer]').forEach(btn => {
   });
 });
 
+/* ═══════════════════════════════════════
+   SPLIT RESIZER
+═══════════════════════════════════════ */
+const resizer = document.getElementById('resizer'), edPane = document.getElementById('edPane'), ws = document.getElementById('ws');
+let dragging = false;
+resizer.addEventListener('mousedown', e => { dragging = true; resizer.classList.add('drag'); document.getElementById('sandbox').style.pointerEvents = 'none'; e.preventDefault(); });
+document.addEventListener('mousemove', e => {
+  if (!dragging) return;
+  const rect = ws.getBoundingClientRect();
+  let left = Math.max(200, Math.min(rect.width - 250, e.clientX - rect.left));
+  edPane.style.width = left + 'px'; edPane.style.flex = 'none';
+  window.editor && window.editor.layout();
+});
+document.addEventListener('mouseup', () => { if (dragging) { dragging = false; resizer.classList.remove('drag'); document.getElementById('sandbox').style.pointerEvents = 'auto'; }});
+
+/* ═══════════════════════════════════════
+   MONACO EDITOR
+═══════════════════════════════════════ */
 let mCode;
+let autoRunTimer = null;
+let syncLock = false;
+
 function initMonaco() {
   require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
   require(['vs/editor/editor.main'], () => {
-    mCode = monaco.editor.createModel(activeProj().code, 'html');
+    const p = activeProj();
+    mCode = monaco.editor.createModel(p.code, 'html');
+
     window.editor = monaco.editor.create(document.getElementById('monacoMount'), {
-      model: mCode, theme:'vs-dark', automaticLayout:true, fontSize:13, fontFamily:"'JetBrains Mono',monospace", wordWrap:'on'
+      model: mCode, theme:'vs-dark', automaticLayout:true, fontSize:13, fontFamily:"'JetBrains Mono',Consolas,monospace",
+      tabSize:2, wordWrap:'on', quickSuggestions:{other:true,comments:false,strings:true}, formatOnType: true
     });
+
     window.editor.onDidChangeModelContent(() => {
+      if (syncLock) return;
       activeProj().code = window.editor.getValue();
       activeProj().updated = Date.now();
-      saveState();
-      if (document.getElementById('chkAutoRun').checked) clearTimeout(window._rt), window._rt = setTimeout(buildPreviewFull, 700);
+      if (document.getElementById('chkAutoSave').checked) saveState();
+      if (document.getElementById('chkAutoRun').checked) {
+        clearTimeout(autoRunTimer);
+        autoRunTimer = setTimeout(buildPreviewFull, 700);
+      }
     });
+
+    window.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, buildPreviewFull);
+    window.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, saveSnap);
+    window.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyP, openCP);
+
     buildPreviewFull();
   });
 }
 
-function buildPreviewFull() {
-  if (!mCode) return;
-  document.getElementById('sandbox').srcdoc = mCode.getValue();
+/* ═══════════════════════════════════════
+   PREVIEW BUILDER & INJECTOR
+═══════════════════════════════════════ */
+let designMode = false;
+let selectedPath = null;
+
+function cdnTags() {
+  return S.cdns.map(l => l.type === 'stylesheet'
+    ? `<link rel="stylesheet" href="${l.url}">`
+    : `<script src="${l.url}"><\/script>`
+  ).join('\n');
 }
 
-// FULLY AUTOMATED 1-CLICK VIDEO RECORDING
-document.getElementById('btnAutoRecord').addEventListener('click', async () => {
-  const btn = document.getElementById('btnAutoRecord');
-  const iframe = document.getElementById('sandbox');
-  
-  try {
-    const iframeWin = iframe.contentWindow;
-    const canvasEl = iframeWin.document.querySelector('canvas');
+function buildPreviewFull() {
+  if (!mCode) return;
+  let rawCode = mCode.getValue();
+  const cdns = cdnTags();
+  if (cdns) {
+      if (rawCode.includes('</head>')) rawCode = rawCode.replace('</head>', cdns + '\n</head>');
+      else rawCode = cdns + '\n' + rawCode;
+  }
+
+  const designStyle = `
+  <style id="__cfs_design_style">
+    [data-cfs-hover] { outline: 2px dashed rgba(91,106,240,0.5) !important; cursor: pointer !important; }
+    [data-cfs-selected] { outline: 2px solid #5b6af0 !important; resize: both; overflow: auto; }
+  </style>`;
+
+  const designScript = `
+  <script id="__cfs_design_script">
+    let _sel = null;
+    let _dragEl = null, _startX, _startY, _initX, _initY;
+
+    function _path(el){if(!el||el===document.body)return 'body';const tag=el.tagName.toLowerCase();const par=el.parentElement;const sibs=par?Array.from(par.children).filter(c=>c.tagName===el.tagName):[];const idx=sibs.indexOf(el);const nth=sibs.length>1?':nth-of-type('+(idx+1)+')':'';return _path(par)+' > '+tag+nth;}
     
-    if (!canvasEl || !canvasEl.captureStream) {
-      alert('No active HTML5 Canvas element found to record automatically.');
-      return;
+    function syncToParent() {
+      let clone = document.documentElement.cloneNode(true);
+      let s1 = clone.querySelector('#__cfs_design_style'); if(s1) s1.remove();
+      let s2 = clone.querySelector('#__cfs_design_script'); if(s2) s2.remove();
+      clone.querySelectorAll('link, script').forEach(tag => {
+          if (tag.src && tag.src.includes('http') && tag.hasAttribute('data-cdn')) tag.remove();
+      });
+      clone.querySelectorAll('[data-cfs-hover], [data-cfs-selected]').forEach(el => { el.removeAttribute('data-cfs-hover'); el.removeAttribute('data-cfs-selected'); });
+      window.parent.postMessage({ type: 'sync-full-code', code: '<!DOCTYPE html>\\n<html lang="en">\\n' + clone.innerHTML + '\\n</html>' }, '*');
     }
 
-    btn.textContent = 'Recording 5s...';
-    btn.classList.add('recording');
+    let ro = new ResizeObserver(() => { if(_sel) syncToParent(); });
 
-    const stream = canvasEl.captureStream(30);
-    const mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
-    const chunks = [];
+    document.addEventListener('mouseover', e => { const el=e.target; if(el===document.body||el===document.documentElement)return; el.setAttribute('data-cfs-hover','1'); e.stopPropagation(); }, true);
+    document.addEventListener('mouseout', e => { e.target.removeAttribute('data-cfs-hover'); }, true);
+    
+    document.addEventListener('mousedown', e => {
+      if (e.target.hasAttribute('data-cfs-selected')) {
+         _dragEl = e.target; _startX = e.clientX; _startY = e.clientY;
+         let cs = window.getComputedStyle(_dragEl);
+         if (cs.position === 'static') _dragEl.style.position = 'relative';
+         _initX = parseFloat(cs.left) || 0; _initY = parseFloat(cs.top) || 0;
+      }
+    });
+    
+    document.addEventListener('mousemove', e => {
+       if (_dragEl) {
+           _dragEl.style.left = (_initX + e.clientX - _startX) + 'px';
+           _dragEl.style.top = (_initY + e.clientY - _startY) + 'px';
+       }
+    });
 
-    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
-    mediaRecorder.onstop = () => {
-      const blob = new Blob(chunks, { type: 'video/webm' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = (activeProj().name || 'output') + '_animation.webm';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+    document.addEventListener('mouseup', () => { if(_dragEl) { _dragEl = null; syncToParent(); } });
+
+    document.addEventListener('click', e => {
+      if(_dragEl) return;
+      e.preventDefault(); e.stopPropagation();
+      if(_sel) { _sel.removeAttribute('data-cfs-selected'); ro.unobserve(_sel); }
+      _sel = e.target;
+      if(_sel===document.body||_sel===document.documentElement){_sel=null; return;}
       
-      btn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> Download Video (5s)`;
-      btn.classList.remove('recording');
-    };
+      _sel.setAttribute('data-cfs-selected','1');
+      ro.observe(_sel);
 
-    mediaRecorder.start();
-    // Automatically stop and download after 5 seconds
-    setTimeout(() => {
-      if (mediaRecorder.state === 'recording') mediaRecorder.stop();
-    }, 5000);
+      const cs=window.getComputedStyle(_sel);
+      window.parent.postMessage({
+        type:'select', path:_path(_sel), tag:_sel.tagName.toLowerCase(),
+        text:_sel.childNodes.length===1&&_sel.childNodes[0].nodeType===3?_sel.textContent:null,
+        innerHTML:_sel.innerHTML,
+        styles:{color:cs.color, backgroundColor:cs.backgroundColor, fontSize:cs.fontSize, fontWeight:cs.fontWeight, padding:cs.padding, margin:cs.margin, borderRadius:cs.borderRadius, textAlign:cs.textAlign, display:cs.display, width:cs.width, height:cs.height, opacity:cs.opacity},
+        attrs:{id:_sel.id||'',className:_sel.className||''}
+      },'*');
+    }, true);
 
-  } catch(err) {
-    console.error(err);
-    alert('Automated video export failed: ' + err.message);
-    btn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> Download Video (5s)`;
-    btn.classList.remove('recording');
+    window.addEventListener('message', e => {
+      if(!e.data || e.data.type !== 'apply-inline') return;
+      if(_sel) {
+         if (e.data.prop === 'innerHTML') _sel.innerHTML = e.data.val;
+         else _sel.style[e.data.prop] = e.data.val;
+         syncToParent();
+      }
+    });
+  <\/script>`;
+
+  let srcdoc = rawCode;
+  if (designMode) {
+    if (srcdoc.includes('</head>')) srcdoc = srcdoc.replace('</head>', designStyle + '\n</head>');
+    else srcdoc = designStyle + srcdoc;
+    if (srcdoc.includes('</body>')) srcdoc = srcdoc.replace('</body>', designScript + '\n</body>');
+    else srcdoc += designScript;
+  }
+
+  const consoleScript = `<script>
+    (function(){
+      var _l=console.log,_w=console.warn,_e=console.error;
+      function _s(t,a){window.parent.postMessage({type:'log',lt:t,msg:a.map(x=>x===null?'null':x===undefined?'undefined':typeof x==='object'?JSON.stringify(x):String(x)).join(' ')},'*');}
+      console.log=function(){_l.apply(this,arguments);_s('log',[].slice.call(arguments));};
+      console.warn=function(){_w.apply(this,arguments);_s('warn',[].slice.call(arguments));};
+      console.error=function(){_e.apply(this,arguments);_s('error',[].slice.call(arguments));};
+      window.onerror=function(m,u,l){_s('error',[m+' (line '+l+')']);};
+    })();
+  <\/script>`;
+  
+  if (srcdoc.includes('<head>')) srcdoc = srcdoc.replace('<head>', '<head>\n' + consoleScript);
+
+  document.getElementById('sandbox').srcdoc = srcdoc;
+}
+
+/* ═══════════════════════════════════════
+   MESSAGE BUS & EXPORTS (SCREENSHOT / RECORDING)
+═══════════════════════════════════════ */
+window.addEventListener('message', e => {
+  if (!e.data) return;
+  if (e.data.type === 'log') addLog(e.data.lt, e.data.msg);
+  if (e.data.type === 'select') handleElementSelect(e.data);
+  if (e.data.type === 'sync-full-code') {
+    syncLock = true;
+    mCode.setValue(e.data.code);
+    activeProj().code = e.data.code;
+    syncLock = false;
   }
 });
 
+// Screenshot Download Feature via html2canvas
 document.getElementById('btnScreenshot').addEventListener('click', async () => {
   const iframe = document.getElementById('sandbox');
   try {
     const canvas = await html2canvas(iframe.contentDocument.body, {scale: 2, useCORS: true});
-    const a = document.createElement('a');
-    a.download = (activeProj().name || 'output') + '_snapshot.png';
-    a.href = canvas.toDataURL('image/png');
-    a.click();
-  } catch(err) { alert('Screenshot error: ' + err.message); }
+    const link = document.createElement('a');
+    link.download = (activeProj().name || 'output') + '_screenshot.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    addLog('log', 'Screenshot downloaded successfully.');
+  } catch (err) {
+    console.error(err);
+    alert('Could not capture screenshot: ' + err.message);
+  }
 });
 
-document.getElementById('btnRun').addEventListener('click', buildPreviewFull);
-document.getElementById('btnFmt').addEventListener('click', () => window.editor?.getAction('editor.action.formatDocument').run());
+// Video Recording Feature via MediaRecorder API
+let mediaRecorder = null;
+let recordedChunks = [];
 
-function renderProjects() {
-  document.getElementById('projList').innerHTML = Object.entries(S.projects).map(([id, p]) => `
-    <div class="proj-item${id===S.activeId?' on':''}" onclick="loadProj('${id}')">
-      <div class="proj-name">${p.name}</div>
+document.getElementById('btnRecord').addEventListener('click', async () => {
+  const btn = document.getElementById('btnRecord');
+  const iframe = document.getElementById('sandbox');
+  
+  if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+    try {
+      // Capture stream from sandbox iframe if available, or fallback to full window frame
+      const iframeWin = iframe.contentWindow;
+      let stream = null;
+      
+      const canvasEl = iframeWin.document.querySelector('canvas');
+      if (canvasEl && canvasEl.captureStream) {
+        stream = canvasEl.captureStream(30);
+      } else if (iframe.captureStream) {
+        stream = iframe.captureStream(30);
+      } else {
+        alert('Video recording requires an active HTML5 Canvas or browser stream support.');
+        return;
+      }
+
+      recordedChunks = [];
+      mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+
+      mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = (activeProj().name || 'output') + '_recording.webm';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+        addLog('log', 'Video recording downloaded successfully.');
+      };
+
+      mediaRecorder.start();
+      btn.classList.add('recording');
+      btn.innerHTML = `<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"/></svg> Stop`;
+      addLog('log', 'Video recording started...');
+    } catch(err) {
+      console.error(err);
+      alert('Recording failed: ' + err.message);
+    }
+  } else {
+    mediaRecorder.stop();
+    btn.classList.remove('recording');
+    btn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg> Record`;
+  }
+});
+
+/* ═══════════════════════════════════════
+   ELEMENT SELECTION + PROPERTIES PANEL
+═══════════════════════════════════════ */
+function handleElementSelect(data) {
+  selectedPath = data.path;
+  const body = document.getElementById('propsBody');
+  const s = data.styles;
+
+  body.innerHTML = `
+    <div class="tag-chip">&lt;${data.tag}&gt;</div>
+    ${data.path !== 'body' ? `<div style="font-size:0.65rem;color:var(--txt3);margin-bottom:12px;word-break:break-all;">${data.path}</div>` : ''}
+    ${data.innerHTML !== null ? `
+    <div class="prop-group">
+      <div class="prop-label">Inner HTML</div>
+      <textarea id="pp-html" style="width:100%;padding:6px 8px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--txt);font-size:0.72rem;resize:vertical;min-height:60px;font-family:'JetBrains Mono',monospace;">${escHtml(data.innerHTML)}</textarea>
+      <button class="small-btn" style="margin-top:5px;width:100%;" id="pp-html-apply">Apply HTML</button>
+    </div>` : ''}
+    <div class="prop-group">
+      <div class="prop-label">Colors</div>
+      <div class="prop-row"><span class="prop-name">Text Color</span><input type="color" class="prop-color" id="pp-color" value="${rgbToHex(s.color)}"></div>
+      <div class="prop-row"><span class="prop-name">Background</span><input type="color" class="prop-color" id="pp-bg" value="${rgbToHex(s.backgroundColor)}"></div>
     </div>
-  `).join('');
+    <button class="add-child-btn" id="pp-wrap-apply">Apply Changes</button>
+  `;
+
+  function applyInline(prop, val) {
+    document.getElementById('sandbox').contentWindow.postMessage({ type: 'apply-inline', prop, val }, '*');
+  }
+
+  const ppHtml = document.getElementById('pp-html-apply');
+  if (ppHtml) ppHtml.onclick = () => applyInline('innerHTML', document.getElementById('pp-html').value);
+  document.getElementById('pp-color').oninput = e => applyInline('color', e.target.value);
+  document.getElementById('pp-bg').oninput = e => applyInline('backgroundColor', e.target.value);
+}
+
+function rgbToHex(rgb) {
+  if (!rgb || rgb === 'transparent' || !rgb.startsWith('rgb')) return '#000000';
+  const parts = rgb.match(/\d+/g);
+  if (!parts || parts.length < 3) return '#000000';
+  return '#' + parts.slice(0,3).map(n => parseInt(n).toString(16).padStart(2,'0')).join('');
+}
+function escHtml(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ═══════════════════════════════════════
+   DESIGN MODE TOGGLE
+═══════════════════════════════════════ */
+document.getElementById('btnDesignMode').addEventListener('click', function() {
+  designMode = !designMode;
+  this.textContent = '🎨 Design: ' + (designMode ? 'ON' : 'OFF');
+  this.classList.toggle('active-state', designMode);
+  document.getElementById('previewFrame').classList.toggle('design-on', designMode);
+  const pp = document.getElementById('propsPanel');
+  if (designMode) pp.classList.remove('closed');
+  else { pp.classList.add('closed'); selectedPath = null; }
+  buildPreviewFull();
+  setTimeout(() => window.editor && window.editor.layout(), 310);
+});
+
+document.getElementById('btnPropsToggle').addEventListener('click', () => {
+  document.getElementById('propsPanel').classList.toggle('closed');
+  setTimeout(() => window.editor && window.editor.layout(), 310);
+});
+
+/* ═══════════════════════════════════════
+   CONSOLE
+═══════════════════════════════════════ */
+const consolePanel = document.getElementById('consolePanel');
+const consoleBody  = document.getElementById('consoleBody');
+
+document.getElementById('consoleHdr').addEventListener('click', e => {
+  if (e.target.closest('#btnClearLog')) return;
+  consolePanel.classList.toggle('closed');
+  document.getElementById('consoleChev').textContent = consolePanel.classList.contains('closed') ? '▲' : '▼';
+  setTimeout(() => window.editor && window.editor.layout(), 310);
+});
+document.getElementById('btnClearLog').addEventListener('click', () => { consoleBody.innerHTML = ''; });
+
+function addLog(type, msg) {
+  const el = document.createElement('div');
+  el.className = 'log-line ' + type;
+  const t = new Date().toLocaleTimeString().split(' ')[0];
+  el.innerHTML = `<span style="color:var(--txt3);margin-right:6px;">[${t}]</span>${escHtml(msg)}`;
+  consoleBody.appendChild(el);
+  consoleBody.scrollTop = consoleBody.scrollHeight;
+}
+
+/* ═══════════════════════════════════════
+   RUN / FORMAT
+═══════════════════════════════════════ */
+document.getElementById('btnRun').addEventListener('click', () => { buildPreviewFull(); addLog('log','Ran manually.'); });
+document.getElementById('btnFmt').addEventListener('click', () => {
+  window.editor && window.editor.getAction('editor.action.formatDocument').run();
+  addLog('log', 'Formatted.');
+});
+
+/* ═══════════════════════════════════════
+   PROJECTS & TEMPLATES
+═══════════════════════════════════════ */
+function renderProjects() {
+  const list = document.getElementById('projList');
+  list.innerHTML = '';
+  Object.entries(S.projects).forEach(([id, p]) => {
+    const el = document.createElement('div');
+    el.className = 'proj-item' + (id === S.activeId ? ' on' : '');
+    el.innerHTML = `<div class="proj-name">${escHtml(p.name)}</div><div class="proj-date">${new Date(p.updated).toLocaleDateString()}</div>`;
+    el.addEventListener('click', () => loadProj(id));
+    list.appendChild(el);
+  });
 }
 function loadProj(id) {
   S.activeId = id; saveState();
-  mCode.setValue(S.projects[id].code);
-  renderProjects(); buildPreviewFull();
+  const p = S.projects[id];
+  if (mCode) mCode.setValue(p.code);
+  renderProjects(); renderSnaps(); buildPreviewFull();
 }
-document.getElementById('btnNewProj').addEventListener('click', () => {
+
+let modalCb = null;
+function showModal(title, desc, defaultVal, label, cb) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalInput').value = defaultVal;
   document.getElementById('modalBd').classList.add('open');
-});
+  modalCb = cb;
+}
 document.getElementById('modalCancel').onclick = () => document.getElementById('modalBd').classList.remove('open');
 document.getElementById('modalOk').onclick = () => {
-  const name = document.getElementById('modalInput').value.trim() || 'New Project';
+  const val = document.getElementById('modalInput').value.trim();
   document.getElementById('modalBd').classList.remove('open');
-  const id = 'p_' + Date.now();
-  S.projects[id] = { name, code:TEMPLATES[0].code, snaps:[], updated:Date.now() };
-  loadProj(id);
+  if (modalCb) modalCb(val);
+};
+document.getElementById('btnNewProj').addEventListener('click', () => {
+  showModal('New Project','Name your project.','Untitled Project','Create', name => {
+    const id = 'p_' + Date.now();
+    S.projects[id] = { name: name||'New Project', code:TEMPLATES[0].code, snaps:[], updated:Date.now() };
+    loadProj(id);
+  });
+});
+
+function renderTemplates() {
+  const grid = document.getElementById('tplGrid');
+  grid.innerHTML = TEMPLATES.map(t => `
+    <div class="tpl-card" onclick="applyTemplate('${t.id}')">
+      <div class="tpl-name">${t.name}</div>
+      <div class="tpl-desc">${t.desc}</div>
+    </div>
+  `).join('');
+}
+window.applyTemplate = function(id) {
+  const t = TEMPLATES.find(x => x.id === id);
+  const pid = 'p_' + Date.now();
+  S.projects[pid] = { name: t.name, code: t.code, snaps: [], updated: Date.now() };
+  loadProj(pid);
 };
 
+/* ═══════════════════════════════════════
+   CDN & SNAPSHOTS
+═══════════════════════════════════════ */
+function renderCdnList() {
+  document.getElementById('cdnList').innerHTML = S.cdns.map((c, i) => `
+    <div class="cdn-item-row"><span class="cdn-url">${c.url}</span><button class="cdn-rm" onclick="removeCdn(${i})">✕</button></div>
+  `).join('') || '<div class="empty-state">No CDNs added.</div>';
+}
+function renderPresets() {
+  document.getElementById('presetWrap').innerHTML = CDN_PRESETS.map(p => `
+    <button class="preset-chip" onclick="addPreset('${p.url}','${p.type}','${p.name}')">${p.name}</button>
+  `).join('');
+}
+window.addPreset = function(url, type) {
+  if (S.cdns.some(c => c.url === url)) return;
+  S.cdns.push({url, type}); saveState(); renderCdnList(); buildPreviewFull();
+};
+window.removeCdn = function(i) { S.cdns.splice(i,1); saveState(); renderCdnList(); buildPreviewFull(); };
+document.getElementById('btnAddCdn').addEventListener('click', () => {
+  const url = document.getElementById('cdnInput').value.trim();
+  if(!url) return;
+  S.cdns.push({url, type: url.endsWith('.css')?'stylesheet':'script'});
+  saveState(); renderCdnList(); buildPreviewFull();
+  document.getElementById('cdnInput').value = '';
+});
+
+function renderSnaps() {
+  const p = activeProj();
+  document.getElementById('snapList').innerHTML = (p.snaps||[]).map((sn, i) => `
+    <div class="snap-item"><span class="snap-meta">Version ${i+1}</span><button class="snap-restore" onclick="restoreSnap(${i})">Restore</button></div>
+  `).join('') || '<div class="empty-state">No snapshots.</div>';
+}
+function saveSnap() {
+  const p = activeProj();
+  if (!p.snaps) p.snaps = [];
+  p.snaps.push({ ts:Date.now(), code:mCode.getValue() });
+  saveState(); renderSnaps();
+}
+document.getElementById('btnNewSnap').addEventListener('click', saveSnap);
+window.restoreSnap = function(i) {
+  mCode.setValue(activeProj().snaps[i].code);
+  buildPreviewFull();
+};
+
+/* ═══════════════════════════════════════
+   EXPORT & DEVICE CONTROLS
+═══════════════════════════════════════ */
+document.getElementById('btnExportHTML').addEventListener('click', () => {
+  const blob = new Blob([activeProj().code], {type:'text/html'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = activeProj().name + '.html'; a.click();
+});
+document.getElementById('btnExportZip').addEventListener('click', () => {
+  const zip = new JSZip(); zip.file('index.html', activeProj().code);
+  zip.generateAsync({type:'blob'}).then(b => {
+    const a = document.createElement('a'); a.href = URL.createObjectURL(b);
+    a.download = activeProj().name + '.zip'; a.click();
+  });
+});
+document.getElementById('selDevice').addEventListener('change', e => {
+  document.getElementById('previewFrame').className = 'preview-frame ' + (e.target.value==='full'?'':e.target.value);
+});
+document.getElementById('btnFullscreen').addEventListener('click', () => {
+  if (!document.fullscreenElement) document.getElementById('prevPane').requestFullscreen();
+  else document.exitFullscreen();
+});
+document.getElementById('btnTheme').addEventListener('click', () => {
+  const dark = document.body.style.background.includes('10');
+  document.body.style.background = dark ? '#f8fafc' : '#0a0b0f';
+  document.body.style.color = dark ? '#0f172a' : '#eef0f8';
+});
+
+/* ═══════════════════════════════════════
+   COMMAND PALETTE
+═══════════════════════════════════════
+*/
+const cpOverlay = document.getElementById('cpOverlay');
+const cpInput = document.getElementById('cpInput');
+const cpResults = document.getElementById('cpResults');
+const COMMANDS = [
+  {label:'Run Code', desc:'Build preview', action:buildPreviewFull},
+  {label:'Take PNG Screenshot', desc:'Capture output as image', action:()=>document.getElementById('btnScreenshot').click()},
+  {label:'Record Video', desc:'Record canvas/frame animation', action:()=>document.getElementById('btnRecord').click()},
+  {label:'Save Snapshot', desc:'Create restore point', action:saveSnap}
+];
+function openCP() { cpOverlay.classList.add('open'); cpInput.focus(); renderCP(); }
+function closeCP() { cpOverlay.classList.remove('open'); }
+function renderCP() {
+  cpResults.innerHTML = COMMANDS.map((c,i)=>`<div class="cp-item" onclick="runCmd(${i})"><div class="cp-label">${c.label}</div><div class="cp-desc">${c.desc}</div></div>`).join('');
+}
+window.runCmd = function(i) { closeCP(); COMMANDS[i].action(); };
+document.getElementById('btnCP').addEventListener('click', openCP);
+cpOverlay.addEventListener('click', e => { if(e.target === cpOverlay) closeCP(); });
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
-  loadState(); renderProjects(); initMonaco();
+  loadState(); renderProjects(); renderSnaps(); renderTemplates(); renderCdnList(); renderPresets(); initMonaco();
 });
 </script>
 </body>
